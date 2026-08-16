@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action - VTT</title>
+  <link rel="stylesheet" href="../css/style-gallery.css">
+</head>
+<body>
+  <header>
+    <h1>Action - VTT</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery-vertical">
+      <img src="../images/action_vtt/DSCF9219.jpg" alt="Pyrénées 1" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 160 1/640s f/5 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt/DSCF1533.jpg" alt="Cantal 1" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 320 1/160s f/4.5 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/action_vtt/DSCF3981.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - Flash déporté - ISO 200 1/140s f/2.2 90 mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/action_vtt/DSCF9195.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 160 1/850s f/5.6 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt/DSCF4848.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lourdes 2022 - DH World Cup - ISO 160 1/680s f/4 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/action_vtt/DSCF4866.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lourdes 2022 - DH World Cup - ISO 32 1/600s f/4.5 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/action_vtt/XS105758.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 320 1/850s f/5.6 8mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt/DSCF4942.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lourdes 2022 - DH World Cup - ISO 160 1/400s f/3.2 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/action_vtt/DSCF4998.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lourdes 2022 - DH World Cup - ISO 160 1/420s f/3.2 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/action_vtt/DSCF5062.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lourdes 2022 - DH World Cup - ISO 160 1/400s f/3.6 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/action_vtt/DSCF9099.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 160 1/680s f/5.6 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt/DSCF9184.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 160 1/1900s f/5.6 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt/XS105715.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 320 1/1100s f/5.6 8mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt/DSCF0079.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - Flash déporté - ISO 500 1/125s f/2 90mm - FUJIFILM X-S10</figcaption>
+    </section>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="lightbox-prev" onclick="changeImage(-1, event)">&#10094;</span>
+      <img id="lightbox-img" src="" alt="">
+      <span class="lightbox-next" onclick="changeImage(1, event)">&#10095;</span>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 PhotoS->DaviD->
+  </footer>
+
+  <script src="../js/lightbox.js"></script>
+  <script src="../js/pages.js"></script>
+  <script>
+
+    const currentPage = window.location.pathname.split("/").pop();
+    const pageIndex = pages.findIndex(p => p.url === currentPage);
+    console.log("Current page:", currentPage);
+    console.log("Index in pages list:", pageIndex);
+
+    if (pageIndex !== -1) {
+      const nav = document.createElement("nav");
+      nav.className = "page-nav";
+
+      if (pages[pageIndex - 1]) {
+        const prev = document.createElement("a");
+        prev.className = "prev";
+        prev.href = pages[pageIndex - 1].url;
+        prev.textContent = "← " + pages[pageIndex - 1].title;
+        nav.appendChild(prev);
+      }
+
+      if (pages[pageIndex + 1]) {
+        const next = document.createElement("a");
+        next.className = "next";
+        next.href = pages[pageIndex + 1].url;
+        next.textContent = pages[pageIndex + 1].title + " →";
+        nav.appendChild(next);
+      }
+
+      const footer = document.querySelector("footer");
+      footer.parentNode.insertBefore(nav, footer);
+    }
+  </script>
+</body>
+</html>

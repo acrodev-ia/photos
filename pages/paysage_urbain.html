@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paysage - Urbain</title>
+  <link rel="stylesheet" href="../css/style-gallery.css">
+</head>
+<body>
+  <header>
+    <h1>Paysage - Urbain</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery-vertical">
+      <img src="../images/paysage_urbain/DSCF0027.jpg" alt="Pyrénées 1" onclick="openLightbox(this)">
+      <figcaption>Toulouse (31) - ISO 125 1s f/6.4 8mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_urbain/DSCF0038.jpg" alt="Cantal 1" onclick="openLightbox(this)">
+      <figcaption>Toulouse (31) - ISO 125 6.5s f/4.5 8mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_urbain/DSCF0039.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Toulouse (31) - ISO 125 6.5s f/13 8mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_urbain/DSCF1547.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Suresnes - ISO 1600 1/60s f/1.4 18mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_urbain/DSCF1601.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Suresnes - ISO 320 1/400s f/3.2 18mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_urbain/DSCF1688.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>La Défense - ISO 320 1/2500s f/5.6 18mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_urbain/DSCF1773.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>La Défense - ISO 160 1/220s f/2.2 18mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_urbain/DSCF1823.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Biarritz - ISO 320 1/850s f/5 18mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_urbain/DSCF9351.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Toulouse (31) - ISO 125 1/480s f/5.6 243mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_urbain/DSCF9386.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Toulouse (31) - ISO 1250 1/600s f/5 204mm - FUJIFILM X-T5</figcaption>
+    </section>
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="lightbox-prev" onclick="changeImage(-1, event)">&#10094;</span>
+      <img id="lightbox-img" src="" alt="">
+      <span class="lightbox-next" onclick="changeImage(1, event)">&#10095;</span>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 PhotoS->DaviD->
+  </footer>
+  <script src="../js/lightbox.js"></script>
+  <script src="../js/pages.js"></script>
+  <script>
+
+    const currentPage = window.location.pathname.split("/").pop();
+    const pageIndex = pages.findIndex(p => p.url === currentPage);
+    console.log("Current page:", currentPage);
+    console.log("Index in pages list:", pageIndex);
+
+    if (pageIndex !== -1) {
+      const nav = document.createElement("nav");
+      nav.className = "page-nav";
+
+      if (pages[pageIndex - 1]) {
+        const prev = document.createElement("a");
+        prev.className = "prev";
+        prev.href = pages[pageIndex - 1].url;
+        prev.textContent = "← " + pages[pageIndex - 1].title;
+        nav.appendChild(prev);
+      }
+
+      if (pages[pageIndex + 1]) {
+        const next = document.createElement("a");
+        next.className = "next";
+        next.href = pages[pageIndex + 1].url;
+        next.textContent = pages[pageIndex + 1].title + " →";
+        nav.appendChild(next);
+      }
+
+      const footer = document.querySelector("footer");
+      footer.parentNode.insertBefore(nav, footer);
+    }
+  </script>
+</body>
+</html>

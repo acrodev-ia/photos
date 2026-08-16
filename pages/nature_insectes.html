@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature - Insectes</title>
+  <link rel="stylesheet" href="../css/style-gallery.css">
+</head>
+<body>
+  <header>
+    <h1>Nature - Animaux</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery-vertical">
+      <img src="../images/nature_insectes/DSCF7987.jpg" alt="Pyrénées 1" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 160 1/1100 s f/4.5 18mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_insectes/DSCF3550.jpg" alt="Cantal 1" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 200 1/800 s f/2 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_insectes/DSCF0215.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 320 1/125 s f/2 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_insectes/DSCF7971.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 160 1/240 s f/2.5 18mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_insectes/DSCF0402.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 320 1/900 s f/4 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_insectes/DSCF1468.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 320 1/125 s f/2 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_insectes/DSCF6997.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 160 1/300 s f/2.2 18mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_insectes/DSCF1704.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 640 1/250 s f/2 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_insectes/DSCF7595.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Bressols (82) - ISO 200 1/125 s f/2 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/nature_insectes/DSCF7146.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Angers (49) - ISO 640 1/1000 s f/5.6 400mm - FUJIFILM X-S10</figcaption>
+    </section>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="lightbox-prev" onclick="changeImage(-1, event)">&#10094;</span>
+      <img id="lightbox-img" src="" alt="">
+      <span class="lightbox-next" onclick="changeImage(1, event)">&#10095;</span>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 PhotoS->DaviD->
+  </footer>
+  <script src="../js/lightbox.js"></script>
+  <script src="../js/pages.js"></script>
+  <script>
+
+    const currentPage = window.location.pathname.split("/").pop();
+    const pageIndex = pages.findIndex(p => p.url === currentPage);
+    console.log("Current page:", currentPage);
+    console.log("Index in pages list:", pageIndex);
+
+    if (pageIndex !== -1) {
+      const nav = document.createElement("nav");
+      nav.className = "page-nav";
+
+      if (pages[pageIndex - 1]) {
+        const prev = document.createElement("a");
+        prev.className = "prev";
+        prev.href = pages[pageIndex - 1].url;
+        prev.textContent = "← " + pages[pageIndex - 1].title;
+        nav.appendChild(prev);
+      }
+
+      if (pages[pageIndex + 1]) {
+        const next = document.createElement("a");
+        next.className = "next";
+        next.href = pages[pageIndex + 1].url;
+        next.textContent = pages[pageIndex + 1].title + " →";
+        nav.appendChild(next);
+      }
+
+      const footer = document.querySelector("footer");
+      footer.parentNode.insertBefore(nav, footer);
+    }
+  </script>
+</body>
+</html>

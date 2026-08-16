@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature - Animaux</title>
+  <link rel="stylesheet" href="../css/style-gallery.css">
+</head>
+<body>
+  <header>
+    <h1>Nature - Animaux</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery-vertical">
+      <img src="../images/nature_animaux/DSCF0961.jpg" alt="Pyrénées 1" onclick="openLightbox(this)">
+      <figcaption>Parc animalier (11) - ISO 800 1/1000 s f/5.6 400mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_animaux/DSCF1724.jpg" alt="Cantal 1" onclick="openLightbox(this)">
+      <figcaption>Pyrénées (64) - ISO 320 1/420 s f/4 18mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_animaux/DSCF1754.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Landes (40) - ISO 160 1/1600 s f/5.6 400mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_animaux/DSCF2917.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Menton (06) - ISO 320 1/8000 s f/5.6 18mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_animaux/DSCF2970.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Ariège (09) - ISO 320 1/350 s f/3.6 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_animaux/DSCF5081.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Toulouse (31) - ISO 320 1/340 s f/5.6 153mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_animaux/DSCF5138.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Toulouse (31) - ISO 500 1/600 s f/5.6 400mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_animaux/DSCF5286.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Sospel (06) - ISO 320 1/400 s f/2.5 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/nature_animaux/DSCF6471.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 125 1/25 s f/1.4 18mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/nature_animaux/DSCF7007.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Bressols (82)</figcaption>
+    </section>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="lightbox-prev" onclick="changeImage(-1, event)">&#10094;</span>
+      <img id="lightbox-img" src="" alt="">
+      <span class="lightbox-next" onclick="changeImage(1, event)">&#10095;</span>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 PhotoS->DaviD->
+  </footer>
+  <script src="../js/lightbox.js"></script>
+  <script src="../js/pages.js"></script>
+  <script>
+
+    const currentPage = window.location.pathname.split("/").pop();
+    const pageIndex = pages.findIndex(p => p.url === currentPage);
+    console.log("Current page:", currentPage);
+    console.log("Index in pages list:", pageIndex);
+
+    if (pageIndex !== -1) {
+      const nav = document.createElement("nav");
+      nav.className = "page-nav";
+
+      if (pages[pageIndex - 1]) {
+        const prev = document.createElement("a");
+        prev.className = "prev";
+        prev.href = pages[pageIndex - 1].url;
+        prev.textContent = "← " + pages[pageIndex - 1].title;
+        nav.appendChild(prev);
+      }
+
+      if (pages[pageIndex + 1]) {
+        const next = document.createElement("a");
+        next.className = "next";
+        next.href = pages[pageIndex + 1].url;
+        next.textContent = pages[pageIndex + 1].title + " →";
+        nav.appendChild(next);
+      }
+
+      const footer = document.querySelector("footer");
+      footer.parentNode.insertBefore(nav, footer);
+    }
+  </script>
+</body>
+</html>

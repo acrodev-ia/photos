@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paysage - Automne</title>
+  <link rel="stylesheet" href="../css/style-gallery.css">
+</head>
+<body>
+  <header>
+    <h1>Paysage - Automne</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery-vertical">
+      <img src="../images/paysage_automne/DSCF0813.jpg" alt="Pyrénées 1" onclick="openLightbox(this)">
+      <figcaption>Aude (11) - ISO 320 1/450 s f/3.2 18mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/paysage_automne/DSCF0865.jpg" alt="Cantal 1" onclick="openLightbox(this)">
+      <figcaption>Aude (11) - ISO 320 1/400 s f/3.2 18mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/paysage_automne/DSCF9665.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 125 1/50 s f/1.4 18mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_automne/XS105820.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 160 1/280 s f/2 90mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_automne/XS105821.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 160 1/250 s f/2 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/paysage_automne/XS105824.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 160 1/400 s f/2.5 90mm - FUJIFILM X-S10</figcaption>
+      <img src="../images/paysage_automne/XS105835.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 160 1/400 s f/2.2 90mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_automne/XS105837.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 320 1/480 s f/2.5 90mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_automne/XS105842.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 160 1/500 s f/2.8 90mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_automne/XS105858.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 320 1/400 s f/2.2 90mm - FUJIFILM X-T5</figcaption>
+      <img src="../images/paysage_automne/XS105883.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne - ISO 640 1/250 s f/2 90mm - FUJIFILM X-T5</figcaption>
+ 
+    </section>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="lightbox-prev" onclick="changeImage(-1, event)">&#10094;</span>
+      <img id="lightbox-img" src="" alt="">
+      <span class="lightbox-next" onclick="changeImage(1, event)">&#10095;</span>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 PhotoS->DaviD->
+  </footer>
+  <script src="../js/lightbox.js"></script>
+  <script src="../js/pages.js"></script>
+  <script>
+
+    const currentPage = window.location.pathname.split("/").pop();
+    const pageIndex = pages.findIndex(p => p.url === currentPage);
+    console.log("Current page:", currentPage);
+    console.log("Index in pages list:", pageIndex);
+
+    if (pageIndex !== -1) {
+      const nav = document.createElement("nav");
+      nav.className = "page-nav";
+
+      if (pages[pageIndex - 1]) {
+        const prev = document.createElement("a");
+        prev.className = "prev";
+        prev.href = pages[pageIndex - 1].url;
+        prev.textContent = "← " + pages[pageIndex - 1].title;
+        nav.appendChild(prev);
+      }
+
+      if (pages[pageIndex + 1]) {
+        const next = document.createElement("a");
+        next.className = "next";
+        next.href = pages[pageIndex + 1].url;
+        next.textContent = pages[pageIndex + 1].title + " →";
+        nav.appendChild(next);
+      }
+
+      const footer = document.querySelector("footer");
+      footer.parentNode.insertBefore(nav, footer);
+    }
+  </script>
+</body>
+</html>

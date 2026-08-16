@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divers - Bivouac</title>
+  <link rel="stylesheet" href="../css/style-gallery.css">
+</head>
+<body>
+  <header>
+    <h1>Divers - Bivouac</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery-vertical">
+      <img src="../images/divers_bivouac/DSCF0639.jpg" alt="Pyrénées 1" onclick="openLightbox(this)">
+      <figcaption>Ariège</figcaption>
+      <img src="../images/divers_bivouac/DSCF2874.jpg" alt="Cantal 1" onclick="openLightbox(this)">
+      <figcaption>Pyrénées</figcaption>
+      <img src="../images/divers_bivouac/DSCF3036.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Pyrénées</figcaption>
+      <img src="../images/divers_bivouac/DSCF4763.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Cantal</figcaption>
+      <img src="../images/divers_bivouac/DSCF8794.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Pyrénées</figcaption>
+      <img src="../images/divers_bivouac/XS105375.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Espagne</figcaption>
+    </section>
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="lightbox-prev" onclick="changeImage(-1, event)">&#10094;</span>
+      <img id="lightbox-img" src="" alt="">
+      <span class="lightbox-next" onclick="changeImage(1, event)">&#10095;</span>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 PhotoS->DaviD->
+  </footer>
+  <script src="../js/lightbox.js"></script>
+  <script src="../js/pages.js"></script>
+  <script>
+
+    const currentPage = window.location.pathname.split("/").pop();
+    const pageIndex = pages.findIndex(p => p.url === currentPage);
+    console.log("Current page:", currentPage);
+    console.log("Index in pages list:", pageIndex);
+
+    if (pageIndex !== -1) {
+      const nav = document.createElement("nav");
+      nav.className = "page-nav";
+
+      if (pages[pageIndex - 1]) {
+        const prev = document.createElement("a");
+        prev.className = "prev";
+        prev.href = pages[pageIndex - 1].url;
+        prev.textContent = "← " + pages[pageIndex - 1].title;
+        nav.appendChild(prev);
+      }
+
+      if (pages[pageIndex + 1]) {
+        const next = document.createElement("a");
+        next.className = "next";
+        next.href = pages[pageIndex + 1].url;
+        next.textContent = pages[pageIndex + 1].title + " →";
+        nav.appendChild(next);
+      }
+
+      const footer = document.querySelector("footer");
+      footer.parentNode.insertBefore(nav, footer);
+    }
+  </script>
+
+</body>
+</html>

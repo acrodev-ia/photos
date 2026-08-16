@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action - VTT</title>
+  <link rel="stylesheet" href="../css/style-gallery.css">
+</head>
+<body>
+  <header>
+    <h1>Action - VTT</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery-vertical">
+      <img src="../images/action_vtt_nb/DSCF6822.jpg" alt="Pyrénées 1" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 125 1/480 s f/3.6 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt_nb/DSCF9092.jpg" alt="Cantal 1" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 160 1/550s f/4.5 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt_nb/DSCF6871.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 125 1/340 s f/16 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt_nb/DSCF8982.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 160 1/1400s f/5.6 219mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt_nb/DSCF6913.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 125 1/480 s f/3.6 90mm - FUJIFILM XT-5</figcaption>
+
+      <img src="../images/action_vtt_nb/DSCF9137.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 160 1/1700s f/5.6 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt_nb/DSCF6959.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 125 1/640 s f/4.5 90mm - FUJIFILM XT-5</figcaption>
+
+      <img src="../images/action_vtt_nb/DSCF6985.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Lot (46) - ISO 125 1/550 s f/4 90mm - FUJIFILM XT-5</figcaption>
+      <img src="../images/action_vtt_nb/DSCF8975.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 160 1/1250s f/5 183mm - FUJIFILM XT-5</figcaption>
+
+      <img src="../images/action_vtt_nb/DSCF9134.jpg" alt="Pyrénées 2" onclick="openLightbox(this)">
+      <figcaption>Loudenvielle 2024 - DH World Cup - ISO 160 1/1400s f/5.6 90mm - FUJIFILM XT-5</figcaption>
+    </section>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="lightbox-prev" onclick="changeImage(-1, event)">&#10094;</span>
+      <img id="lightbox-img" src="" alt="">
+      <span class="lightbox-next" onclick="changeImage(1, event)">&#10095;</span>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 PhotoS->DaviD->
+  </footer>
+
+  <script src="../js/lightbox.js"></script>
+  <script src="../js/pages.js"></script>
+  <script>
+
+    const currentPage = window.location.pathname.split("/").pop();
+    const pageIndex = pages.findIndex(p => p.url === currentPage);
+    console.log("Current page:", currentPage);
+    console.log("Index in pages list:", pageIndex);
+
+    if (pageIndex !== -1) {
+      const nav = document.createElement("nav");
+      nav.className = "page-nav";
+
+      if (pages[pageIndex - 1]) {
+        const prev = document.createElement("a");
+        prev.className = "prev";
+        prev.href = pages[pageIndex - 1].url;
+        prev.textContent = "← " + pages[pageIndex - 1].title;
+        nav.appendChild(prev);
+      }
+
+      if (pages[pageIndex + 1]) {
+        const next = document.createElement("a");
+        next.className = "next";
+        next.href = pages[pageIndex + 1].url;
+        next.textContent = pages[pageIndex + 1].title + " →";
+        nav.appendChild(next);
+      }
+
+      const footer = document.querySelector("footer");
+      footer.parentNode.insertBefore(nav, footer);
+    }
+  </script>
+</body>
+</html>
