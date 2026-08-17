@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Outfit:wght@300;400;500&display=swap");
+
 *,
 *::before,
 *::after {
@@ -6,58 +8,72 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  color: #333;
+  font-family: Outfit, "Segoe UI", sans-serif;
+  background: #111;
+  color: #e8e8e8;
 }
 
 header {
-  background-color: #f4f4f4;
-  color: #222;
-  border-bottom: 1px solid #ddd;
-  padding: 16px 16px 8px;
+  background: transparent;
+  color: #eee;
+  padding: 28px 16px 8px;
   text-align: center;
 }
 
 header h1 {
-  margin: 0.4em 0;
-  font-size: clamp(1.2rem, 4vw, 2rem);
+  margin: 0.35em 0 0.5em;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  letter-spacing: 0.04em;
   overflow-wrap: anywhere;
 }
 
 nav ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 8px;
+  margin: 0 0 12px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
 }
 
 nav a {
-  color: #222;
+  color: #9a9a9a;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (hover: hover) {
+  nav a:hover {
+    color: #fff;
+  }
 }
 
 .grid-gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 40px;
+  gap: 8px;
+  padding: 16px 8px 40px;
 }
 
 .grid-item {
+  position: relative;
+  display: block;
   width: 100%;
   min-width: 0;
-  text-align: center;
+  overflow: hidden;
   text-decoration: none;
-  color: #333;
+  color: #fff;
 }
 
 .grid-item img {
@@ -65,41 +81,49 @@ nav a {
   width: 100%;
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-@media (hover: hover) {
-  .grid-item img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
+  transition: filter 0.35s ease;
 }
 
 .grid-item p {
-  margin-top: 10px;
-  font-weight: bold;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 32px 12px 12px;
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78), transparent);
+}
+
+@media (hover: hover) {
+  .grid-item:hover img {
+    filter: brightness(1.08);
+  }
 }
 
 footer {
   text-align: center;
-  padding: 20px 16px;
-  background-color: #222;
-  color: white;
+  padding: 16px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #777;
+  background: transparent;
 }
 
 @media (max-width: 1024px) {
   .grid-gallery {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    padding: 24px;
+    gap: 6px;
+    padding: 12px 6px 32px;
   }
 }
 
 @media (max-width: 600px) {
   .grid-gallery {
     grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 16px;
+    gap: 6px;
+    padding: 8px 0 28px;
   }
 }

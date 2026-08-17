@@ -17,22 +17,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
   gallery.forEach(img => observer.observe(img));
 
+  ensureLightboxCaption();
   openLightboxFromQuery();
 });
 
+function getCaption(img) {
+  const next = img.nextElementSibling;
+  return next && next.tagName === "FIGCAPTION" ? next.textContent.trim() : "";
+}
+
+function ensureLightboxCaption() {
+  const lightbox = document.getElementById("lightbox");
+  if (!lightbox || document.getElementById("lightbox-caption")) return;
+
+  const caption = document.createElement("p");
+  caption.id = "lightbox-caption";
+  caption.className = "lightbox-caption";
+  lightbox.appendChild(caption);
+}
+
+function showLightboxImage(img) {
+  const lightboxImg = document.getElementById("lightbox-img");
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt || "";
+
+  const caption = document.getElementById("lightbox-caption");
+  if (caption) caption.textContent = getCaption(img);
+}
+
 function openLightbox(element) {
-  galleryImages = Array.from(document.querySelectorAll('.gallery-vertical img'));
+  galleryImages = Array.from(document.querySelectorAll(".gallery-vertical img"));
   currentIndex = galleryImages.indexOf(element);
 
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  lightboxImg.src = element.src;
-  lightbox.style.display = 'flex';
+  ensureLightboxCaption();
+  showLightboxImage(element);
+  document.getElementById("lightbox").style.display = "flex";
 }
 
 function closeLightbox(event) {
-  if (event.target.id === 'lightbox-img') return;
-  document.getElementById('lightbox').style.display = 'none';
+  if (event.target.id !== "lightbox") return;
+  document.getElementById("lightbox").style.display = "none";
 }
 
 function changeImage(direction, event) {
@@ -50,8 +74,7 @@ function changeImage(direction, event) {
     currentIndex = nextIndex;
   }
 
-  const lightboxImg = document.getElementById('lightbox-img');
-  lightboxImg.src = galleryImages[currentIndex].src;
+  showLightboxImage(galleryImages[currentIndex]);
 }
 
 function getAdjacentPage(direction) {
