@@ -2,22 +2,48 @@ let galleryImages = [];
 let currentIndex = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const gallery = document.querySelectorAll('.gallery-vertical img');
+  const gallery = document.querySelectorAll(".gallery-vertical img");
   gallery.forEach(img => {
-    img.addEventListener('click', () => openLightbox(img));
+    img.addEventListener("click", () => openLightbox(img));
   });
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+        entry.target.classList.add("visible");
       }
     });
   }, { threshold: 0.1 });
 
   gallery.forEach(img => observer.observe(img));
 
+  const lightboxImg = document.getElementById("lightbox-img");
+  if (lightboxImg) {
+    lightboxImg.addEventListener("click", event => {
+      event.stopPropagation();
+      const rect = lightboxImg.getBoundingClientRect();
+      const goNext = event.clientX > rect.left + rect.width / 2;
+      changeImage(goNext ? 1 : -1, event);
+    });
+  }
+
+  document.addEventListener("keydown", event => {
+    const lightbox = document.getElementById("lightbox");
+    if (!lightbox || lightbox.style.display !== "flex") return;
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      changeImage(1, event);
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      changeImage(-1, event);
+    } else if (event.key === "Escape") {
+      lightbox.style.display = "none";
+    }
+  });
+
   ensureLightboxCaption();
+  ensureLightboxHints();
   openLightboxFromQuery();
 });
 
@@ -36,6 +62,32 @@ function ensureLightboxCaption() {
   lightbox.appendChild(caption);
 }
 
+function ensureLightboxHints() {
+  const lightbox = document.getElementById("lightbox");
+  if (!lightbox || document.querySelector(".lightbox-hint-next")) return;
+
+  const prevHint = document.createElement("span");
+  prevHint.className = "lightbox-hint lightbox-hint-prev";
+  const nextHint = document.createElement("span");
+  nextHint.className = "lightbox-hint lightbox-hint-next";
+  lightbox.appendChild(prevHint);
+  lightbox.appendChild(nextHint);
+}
+
+function updateGalleryHints() {
+  const prevHint = document.querySelector(".lightbox-hint-prev");
+  const nextHint = document.querySelector(".lightbox-hint-next");
+  if (!prevHint || !nextHint) return;
+
+  const prevPage = currentIndex <= 0 ? getAdjacentPage(-1) : null;
+  const nextPage = currentIndex >= galleryImages.length - 1 ? getAdjacentPage(1) : null;
+
+  prevHint.textContent = prevPage ? "← " + prevPage.title : "";
+  nextHint.textContent = nextPage ? nextPage.title + " →" : "";
+  prevHint.hidden = !prevPage;
+  nextHint.hidden = !nextPage;
+}
+
 function showLightboxImage(img) {
   const lightboxImg = document.getElementById("lightbox-img");
   lightboxImg.src = img.src;
@@ -43,6 +95,8 @@ function showLightboxImage(img) {
 
   const caption = document.getElementById("lightbox-caption");
   if (caption) caption.textContent = getCaption(img);
+
+  updateGalleryHints();
 }
 
 function openLightbox(element) {
@@ -50,6 +104,7 @@ function openLightbox(element) {
   currentIndex = galleryImages.indexOf(element);
 
   ensureLightboxCaption();
+  ensureLightboxHints();
   showLightboxImage(element);
   document.getElementById("lightbox").style.display = "flex";
 }
@@ -100,7 +155,7 @@ function openLightboxFromQuery() {
   const lightboxPos = new URLSearchParams(window.location.search).get("lightbox");
   if (!lightboxPos) return;
 
-  galleryImages = Array.from(document.querySelectorAll('.gallery-vertical img'));
+  galleryImages = Array.from(document.querySelectorAll(".gallery-vertical img"));
   if (!galleryImages.length) return;
 
   let index = 0;
