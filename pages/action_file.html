@@ -55,36 +55,5 @@
 
   <script src="../js/lightbox.js"></script>
   <script src="../js/pages.js"></script>
-  <script>
-
-    const currentPage = window.location.pathname.split("/").pop();
-    const pageIndex = pages.findIndex(p => p.url === currentPage);
-    console.log("Current page:", currentPage);
-    console.log("Index in pages list:", pageIndex);
-
-    if (pageIndex !== -1) {
-      const nav = document.createElement("nav");
-      nav.className = "page-nav";
-
-      if (pages[pageIndex - 1]) {
-        const prev = document.createElement("a");
-        prev.className = "prev";
-        prev.href = pages[pageIndex - 1].url;
-        prev.textContent = "← " + pages[pageIndex - 1].title;
-        nav.appendChild(prev);
-      }
-
-      if (pages[pageIndex + 1]) {
-        const next = document.createElement("a");
-        next.className = "next";
-        next.href = pages[pageIndex + 1].url;
-        next.textContent = pages[pageIndex + 1].title + " →";
-        nav.appendChild(next);
-      }
-
-      const footer = document.querySelector("footer");
-      footer.parentNode.insertBefore(nav, footer);
-    }
-  </script>
 </body>
 </html>

@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.1 });
 
   gallery.forEach(img => observer.observe(img));
+
+  openLightboxFromQuery();
 });
 
 function openLightbox(element) {
@@ -33,13 +35,55 @@ function closeLightbox(event) {
   document.getElementById('lightbox').style.display = 'none';
 }
 
-function changeImage(direction) {
-  event.stopPropagation(); // <-- empêche le clic de remonter et de fermer la lightbox
+function changeImage(direction, event) {
+  if (event) event.stopPropagation();
 
-  currentIndex += direction;
-  if (currentIndex < 0) currentIndex = galleryImages.length - 1;
-  if (currentIndex >= galleryImages.length) currentIndex = 0;
+  const nextIndex = currentIndex + direction;
+
+  if (nextIndex >= galleryImages.length) {
+    if (goToAdjacentGallery(1, "first")) return;
+    currentIndex = 0;
+  } else if (nextIndex < 0) {
+    if (goToAdjacentGallery(-1, "last")) return;
+    currentIndex = galleryImages.length - 1;
+  } else {
+    currentIndex = nextIndex;
+  }
 
   const lightboxImg = document.getElementById('lightbox-img');
   lightboxImg.src = galleryImages[currentIndex].src;
+}
+
+function getAdjacentPage(direction) {
+  if (typeof pages === "undefined" || !pages.length) return null;
+
+  const currentPage = decodeURIComponent(window.location.pathname.split("/").pop());
+  const pageIndex = pages.findIndex(p => p.url === currentPage);
+  if (pageIndex === -1) return null;
+
+  const nextIndex = (pageIndex + direction + pages.length) % pages.length;
+  if (nextIndex === pageIndex) return null;
+  return pages[nextIndex];
+}
+
+function goToAdjacentGallery(direction, lightboxPos) {
+  const adjacent = getAdjacentPage(direction);
+  if (!adjacent) return false;
+  window.location.href = adjacent.url + "?lightbox=" + lightboxPos;
+  return true;
+}
+
+function openLightboxFromQuery() {
+  const lightboxPos = new URLSearchParams(window.location.search).get("lightbox");
+  if (!lightboxPos) return;
+
+  galleryImages = Array.from(document.querySelectorAll('.gallery-vertical img'));
+  if (!galleryImages.length) return;
+
+  let index = 0;
+  if (lightboxPos === "last") index = galleryImages.length - 1;
+  else if (lightboxPos !== "first") index = parseInt(lightboxPos, 10) || 0;
+
+  openLightbox(galleryImages[index]);
+  history.replaceState({}, "", window.location.pathname);
 }
