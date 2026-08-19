@@ -19,8 +19,15 @@ const pages = [
   { url: "divers_bivouac.html", title: "Divers - Bivouac" }
 ];
 
+function getCurrentPageFile() {
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  let name = decodeURIComponent(parts.pop() || "");
+  if (name && !name.endsWith(".html")) name += ".html";
+  return name;
+}
+
 function initPageNav() {
-  const currentPage = decodeURIComponent(window.location.pathname.split("/").pop());
+  const currentPage = getCurrentPageFile();
   const pageIndex = pages.findIndex(p => p.url === currentPage);
   if (pageIndex === -1) return;
 

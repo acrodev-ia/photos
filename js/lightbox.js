@@ -135,8 +135,10 @@ function changeImage(direction, event) {
 function getAdjacentPage(direction) {
   if (typeof pages === "undefined" || !pages.length) return null;
 
-  const currentPage = decodeURIComponent(window.location.pathname.split("/").pop());
-  const pageIndex = pages.findIndex(p => p.url === currentPage);
+  const currentPage = typeof getCurrentPageFile === "function"
+    ? getCurrentPageFile()
+    : decodeURIComponent(window.location.pathname.split("/").filter(Boolean).pop() || "");
+  const pageIndex = pages.findIndex(p => p.url === currentPage || p.url === currentPage + ".html");
   if (pageIndex === -1) return null;
 
   const nextIndex = (pageIndex + direction + pages.length) % pages.length;
